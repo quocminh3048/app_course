@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'dart:io';
-import 'package:flutter_pdfview/flutter_pdfview.dart';
-import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class CrossPlatformPdfViewer extends StatelessWidget {
@@ -110,36 +109,17 @@ class CrossPlatformPdfViewer extends StatelessWidget {
 
   Widget _buildPdfViewer() {
     try {
-      // Try to use Syncfusion PDF viewer (works on all platforms)
-      return SfPdfViewer.file(
-        File(filePath),
-        enableDoubleTapZooming: true,
-        enableTextSelection: true,
-        canShowScrollHead: true,
-        canShowScrollStatus: true,
-        canShowPaginationDialog: true,
+      // Use WebView to display PDF
+      final file = File(filePath);
+      final fileUri = Uri.file(file.absolute.path);
+      
+      return WebViewWidget(
+        controller: WebViewController()
+          ..setJavaScriptMode(JavaScriptMode.unrestricted)
+          ..loadRequest(Uri.parse('file://${file.absolute.path}')),
       );
     } catch (e) {
-      // Fallback to flutter_pdfview for mobile if Syncfusion fails
-      if (Platform.isAndroid || Platform.isIOS) {
-        try {
-          return PDFView(
-            filePath: filePath,
-            enableSwipe: true,
-            swipeHorizontal: false,
-            autoSpacing: true,
-            pageFling: true,
-            pageSnap: true,
-            defaultPage: 0,
-            fitPolicy: FitPolicy.BOTH,
-            preventLinkNavigation: false,
-          );
-        } catch (e2) {
-          return _buildFallbackViewer();
-        }
-      } else {
-        return _buildFallbackViewer();
-      }
+      return _buildFallbackViewer();
     }
   }
 

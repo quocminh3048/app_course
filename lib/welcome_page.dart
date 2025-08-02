@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:flutter/services.dart';
 import 'dart:convert'; // Added for jsonDecode
 import 'package:audioplayers/audioplayers.dart';
-import 'package:flutter_pdfview/flutter_pdfview.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'debug_page.dart';
 import 'pages/api_lessons_page.dart';
