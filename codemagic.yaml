@@ -11,4 +11,7 @@ workflows:
       - name: Flutter build apk
         script: flutter build apk --debug
     artifacts:
-      - build/**/outputs/**/*.apk 
+      - build/**/outputs/**/*.apk
+    android:
+      gradle:
+        gradle_args: "-Dorg.gradle.jvmargs=-Xmx4096m -XX:MaxPermSize=512m -XX:+HeapDumpOnOutOfMemoryError" 

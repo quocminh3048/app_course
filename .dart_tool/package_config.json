@@ -99,9 +99,9 @@
     },
     {
       "name": "checked_yaml",
-      "rootUri": "file:///C:/Users/Admin/AppData/Local/Pub/Cache/hosted/pub.dev/checked_yaml-2.0.3",
+      "rootUri": "file:///C:/Users/Admin/AppData/Local/Pub/Cache/hosted/pub.dev/checked_yaml-2.0.4",
       "packageUri": "lib/",
-      "languageVersion": "2.19"
+      "languageVersion": "3.8"
     },
     {
       "name": "cli_util",
@@ -537,9 +537,9 @@
     },
     {
       "name": "url_launcher",
-      "rootUri": "file:///C:/Users/Admin/AppData/Local/Pub/Cache/hosted/pub.dev/url_launcher-6.3.1",
+      "rootUri": "file:///C:/Users/Admin/AppData/Local/Pub/Cache/hosted/pub.dev/url_launcher-6.3.2",
       "packageUri": "lib/",
-      "languageVersion": "3.3"
+      "languageVersion": "3.6"
     },
     {
       "name": "url_launcher_android",

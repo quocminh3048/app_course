@@ -55,6 +55,11 @@ android {
             useLegacyPackaging = false
         }
     }
+    
+    // Increase Java heap size for dex processing
+    dexOptions {
+        javaMaxHeapSize = "4g"
+    }
 }
 
 flutter {
