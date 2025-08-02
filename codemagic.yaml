@@ -1,0 +1,34 @@
+workflows:
+  android-workflow:
+    name: Android Build
+    environment:
+      flutter: stable
+      xcode: latest
+      cocoapods: default
+      android_signing:
+        - keystore_reference
+      vars:
+        PACKAGE_NAME: "com.example.course_app"
+    scripts:
+      - name: Set up code signing settings on Codemagic
+        script: |
+          keytool -list -v \
+            -alias androiddebugkey \
+            -keystore ~/.android/debug.keystore \
+            -storepass android \
+            -keypass android
+      - name: Get Flutter packages
+        script: flutter pub get
+      - name: Flutter build ipa
+        script: |
+          flutter build apk --release \
+            --build-number=$CM_BUILD_NUMBER \
+            --dart-define=CM_BUILD_NUMBER=$CM_BUILD_NUMBER
+    artifacts:
+      - build/**/outputs/**/*.apk
+      - build/**/outputs/**/mapping.txt
+      - flutter_drive.log
+    publishing:
+      email:
+        recipients:
+          - user@example.com 
